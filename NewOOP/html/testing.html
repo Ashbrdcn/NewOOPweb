@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife Pro - Your Fitness Journey</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --dark: #1e1b4b;
+            --light: #f8fafc;
+            --success: #22c55e;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(30, 27, 75, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(30, 27, 75, 0.9), rgba(30, 27, 75, 0.9)),
+                        url('/api/placeholder/1920/1080') center/cover;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+
+        /* Program Cards */
+        .program-card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--dark);
+        }
+
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .program-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Features Section */
+        .feature-box {
+            padding: 2rem;
+            border-radius: 15px;
+            background: var(--dark);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: var(--dark);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem;
+        }
+
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        /* Stats Counter */
+        .stats-counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Custom Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .navbar-collapse {
+                background: rgba(30, 27, 75, 0.98);
+                padding: 1rem;
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark text-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-dumbbell text-primary me-2"></i>
+                FitLife Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#programs">Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary ms-lg-3 px-4" href="#join">Join Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="text-light mb-4">Transform Your Body<br>Transform Your Life</h1>
+                    <p class="lead text-light-50 mb-4">Join our community of fitness enthusiasts and achieve your dream physique with expert guidance and personalized workout plans.</p>
+                    <a href="#join" class="btn btn-primary btn-lg me-3 mb-3">Start Your Journey</a>
+                    <a href="#programs" class="btn btn-outline-light btn-lg mb-3">Explore Programs</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section class="py-5" id="programs">
+        <div class="container py-5">
+            <h2 class="text-center mb-5" data-aos="fade-up">Our Programs</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="program-card card text-light">
+                        <img src="/api/placeholder/400/300" class="card-img-top" alt="Beginner Program">
+                        <div class="card-body">
+                            <h5 class="card-title">Beginner Program</h5>
+                            <p class="card-text">Perfect for those just starting their fitness journey.</p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="program-card card text-light">
+                        <img src="/api/placeholder/400/300" class="card-img-top" alt="Intermediate Program">
+                        <div class="card-body">
+                            <h5 class="card-title">Intermediate Program</h5>
+                            <p class="card-text">Take your fitness to the next level.</p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="program-card card text-light">
+                        <img src="/api/placeholder/400/300" class="card-img-top" alt="Advanced Program">
+                        <div class="card-body">
+                            <h5 class="card-title">Advanced Program</h5>
+                            <p class="card-text">Challenge yourself with intense workouts.</p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5 bg-darker" id="features">
+        <div class="container py-5">
+            <h2 class="text-center mb-5" data-aos="fade-up">Why Choose Us</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-box text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="fas fa-dumbbell fa-2x text-light"></i>
+                        </div>
+                        <h4>Expert Trainers</h4>
+                        <p>Learn from certified professionals who care about your success.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-box text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="fas fa-heartbeat fa-2x text-light"></i>
+                        </div>
+                        <h4>Personalized Plans</h4>
+                        <p>Get customized workout and nutrition plans tailored to your goals.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-box text-center">
+                        <div class="feature-icon mx-auto">
+                            <i class="fas fa-users fa-2x text-light"></i>
+                        </div>
+                        <h4>Supportive Community</h4>
+                        <p>Join a community that motivates and supports your fitness journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5" id="testimonials">
+        <div class="container py-5">
+            <h2 class="text-center mb-5" data-aos="fade-up">Success Stories</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card text-center">
+                        <img src="/api/placeholder/80/80" alt="Testimonial 1" class="testimonial-img">
+                        <h5>John Doe</h5>
+                        <p class="text-muted">Lost 30 lbs in 3 months</p>
+                        <p>"The personalized approach and constant support made all the difference in my fitness journey."</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card text-center">
+                        <img src="/api/placeholder/80/80" alt="Testimonial 2" class="testimonial-img">
+                        <h5>Jane Smith</h5>
+                        <p class="text-muted">Gained muscle mass</p>
+                        <p>"The expert guidance helped me achieve my muscle gain goals safely and effectively."</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card text-center">
+                        <img src="/api/placeholder/80/80" alt="Testimonial 3" class="testimonial-img">
+                        <h5>Mike Johnson</h5>
+                        <p class="text-muted">Improved overall fitness</p>
+                        <p>"The supportive community and structured programs helped me stay motivated."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Section -->
+    <section class="py-5 bg-primary" id="join">
+        <div class="container py-5 text-center">
+            <h2 class="mb-4" data-aos="fade-up">Ready to Start Your Transformation?</h2>
+            <p class="lead mb-4" data-aos="fade-up" data-aos-delay="100">Join now and get 20% off your first month!</p>
+            <button class="btn btn-light btn-lg" data-aos="fade-up" data-aos-delay="200">Sign Up Now</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-darker">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 FitLife Pro. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(30, 27, 75, 0.98)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+            } else {
+                navbar.style.background = 'rgba(30, 27, 75, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Stats Counter Animation
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = Math.round(current);
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 10);
+        }
+
+        // Add Stats Section dynamically
+        const statsSection = document.createElement('section');
+        statsSection.className = 'py-5 bg-darker';
+        statsSection.innerHTML = `
+            <div class="container py-5">
+                <div class="row text-center">
+                    <div class="col-md-3 mb-4" data-aos="fade-up">
+                        <div class="stats-counter" id="memberCount">0</div>
+                        <p>Active Members</p>
+                    </div>
+                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stats-counter" id="trainerCount">0</div>
+                        <p>Expert Trainers</p>
+                    </div>
+                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stats-counter" id="programCount">0</div>
+                        <p>Fitness Programs</p>
+                    </div>
+                    <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stats-counter" id="locationCount">0</div>
+                        <p>Locations</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.querySelector('#features').after(statsSection);
+
+        // Initialize counters when stats section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(document.getElementById('memberCount'), 5000);
+                    animateCounter(document.getElementById('trainerCount'), 50);
+                    animateCounter(document.getElementById('programCount'), 100);
+                    animateCounter(document.getElementById('locationCount'), 25);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        observer.observe(statsSection);
+
+        // Add hover effect to program cards
+        document.querySelectorAll('.program-card').forEach(card => {
+            card.addEventListener('mouseover', function() {
+                this.querySelector('img').style.transform = 'scale(1.1)';
+                this.querySelector('img').style.transition = 'transform 0.5s ease';
+            });
+            card.addEventListener('mouseout', function() {
+                this.querySelector('img').style.transform = 'scale(1)';
+            });
+        });
+
+        // Add interactive BMI Calculator
+        const calculatorSection = document.createElement('section');
+        calculatorSection.className = 'py-5';
+        calculatorSection.innerHTML = `
+            <div class="container py-5">
+                <h2 class="text-center mb-5" data-aos="fade-up">BMI Calculator</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="card bg-dark text-light p-4" data-aos="fade-up">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Weight (kg)</label>
+                                    <input type="number" class="form-control" id="weight">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Height (cm)</label>
+                                    <input type="number" class="form-control" id="height">
+                                </div>
+                                <button class="btn btn-primary w-100" onclick="calculateBMI()">Calculate BMI</button>
+                                <div class="mt-3 text-center" id="bmiResult"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.querySelector('#testimonials').after(calculatorSection);
+
+        // BMI Calculator function
+        window.calculateBMI = function() {
+            const weight = document.getElementById('weight').value;
+            const height = document.getElementById('height').value / 100; // convert to meters
+            if (weight && height) {
+                const bmi = (weight / (height * height)).toFixed(1);
+                let category = '';
+                let color = '';
+                
+                if (bmi < 18.5) {
+                    category = 'Underweight';
+                    color = 'text-warning';
+                } else if (bmi < 25) {
+                    category = 'Normal weight';
+                    color = 'text-success';
+                } else if (bmi < 30) {
+                    category = 'Overweight';
+                    color = 'text-warning';
+                } else {
+                    category = 'Obese';
+                    color = 'text-danger';
+                }
+
+                document.getElementById('bmiResult').innerHTML = `
+                    <h4>Your BMI: <span class="${color}">${bmi}</span></h4>
+                    <p>Category: <span class="${color}">${category}</span></p>
+                `;
+            }
+        };
+
+        // Add workout timer
+        const timerSection = document.createElement('section');
+        timerSection.className = 'py-5 bg-darker';
+        timerSection.innerHTML = `
+            <div class="container py-5">
+                <h2 class="text-center mb-5" data-aos="fade-up">Workout Timer</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center">
+                        <div class="card bg-dark text-light p-4" data-aos="fade-up">
+                            <div class="card-body">
+                                <h1 id="timer" class="display-1 mb-4">00:00</h1>
+                                <div class="btn-group">
+                                    <button class="btn btn-primary btn-lg" onclick="startTimer()">Start</button>
+                                    <button class="btn btn-warning btn-lg" onclick="pauseTimer()">Pause</button>
+                                    <button class="btn btn-danger btn-lg" onclick="resetTimer()">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.querySelector('#join').before(timerSection);
+
+        // Timer functionality
+        let timerInterval;
+        let seconds = 0;
+        let isRunning = false;
+
+        window.startTimer = function() {
+            if (!isRunning) {
+                isRunning = true;
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    const mins = Math.floor(seconds / 60);
+                    const secs = seconds % 60;
+                    document.getElementById('timer').textContent = 
+                        `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+        };
+
+        window.pauseTimer = function() {
+            isRunning = false;
+            clearInterval(timerInterval);
+        };
+
+        window.resetTimer = function() {
+            isRunning = false;
+            clearInterval(timerInterval);
+            seconds = 0;
+            document.getElementById('timer').textContent = '00:00';
+        };
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            const loader = document.createElement('div');
+            loader.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: var(--dark);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                transition: opacity 0.5s ease;
+            `;
+            loader.innerHTML = '<div class="spinner-border text-primary" role="status"></div>';
+            document.body.appendChild(loader);
+
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 500);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>s
